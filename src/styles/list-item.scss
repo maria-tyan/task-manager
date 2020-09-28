@@ -1,0 +1,8 @@
+.list-item {
+  display: grid;
+  grid-template-columns: 40px auto 150px 100px;
+
+  &__element {
+    padding: 5px 20px;
+  }
+}

@@ -1,19 +1,42 @@
 import React from 'react';
-import './App.css';
+import './styles/app.scss';
+import TasksList from './components/TasksList';
 
 function App() {
+  const tasks = [
+    {
+      name: 'Tasks List',
+      description: 'Make a List Of Tasks',
+      deadline: 1102020,
+      state: 'In Progress',
+    },
+    {
+      name: 'Task Init Page',
+      description: 'Make a Task Init Page',
+      deadline: 5102020,
+      state: 'In Progress',
+    },
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Task Manager
-        </p>
-      </header>
-      <section>
+    <div className="app">
+      <header className="app__header">
         <h1>
-          This is a Task Manager App.
+          Task Manager
         </h1>
+      </header>
+      <section className="app__section">
+        <TasksList tasks={tasks} />
       </section>
+      <footer className="app__footer">
+        <div>
+          <p>
+            &copy;
+            { new Date().getFullYear() }
+            &nbsp;
+            Maria Efremova
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
