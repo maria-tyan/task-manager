@@ -6,7 +6,7 @@ function SelectComponent(props) {
 
   function selectOption(index) {
     setOption(index)
-    console.log(index)
+    props.selectOnChange(index)
   }
 
   const classes = ['select-component', 'select-component_selected-' + selectedOption]
@@ -47,6 +47,7 @@ function SelectComponent(props) {
 
 SelectComponent.propTypes = {
   optionsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectOnChange: PropTypes.func.isRequired,
 }
 
 export default SelectComponent

@@ -6,34 +6,33 @@ import SelectComponent from './components/SelectComponent'
 
 function App() {
   const [startDate, setStartDate] = useState(new Date())
-  const [tasks, setTasks] = useState([
+  const tasksData = [
     {
       name: 'Tasks List',
       description: 'Make a List Of Tasks',
-      deadline: 1102020,
+      deadline: 5,
       state: 'In Progress',
     },
     {
       name: 'Task Init Page',
       description: 'Make a Task Init Page',
-      deadline: 5102020,
-      state: 'In Progress',
-    },
-  ])
-  const newTasks = [
-    {
-      name: 'Tasks List123',
-      description: 'Make a List Of Tasks',
-      deadline: 1102020,
+      deadline: 10,
       state: 'In Progress',
     },
     {
-      name: 'Task Init Page',
-      description: 'Make a Task Init Page',
-      deadline: 5102020,
+      name: 'Filter',
+      description: 'Make a Filter Fror Task List',
+      deadline: 20,
+      state: 'Finished',
+    },
+    {
+      name: 'Create Form',
+      description: 'Make a Form',
+      deadline: 27,
       state: 'In Progress',
     },
   ]
+  const [tasks, setTasks] = useState(tasksData)
 
   const optionsList = [
     {
@@ -58,8 +57,26 @@ function App() {
     },
   ]
 
-  function OnClick() {
-    setTasks(newTasks)
+  let filterOption = 0
+
+  function filterData(option) {
+    filterOption = option
+    setTasks(filterList(tasksData))
+    console.log(filterOption, 'app', tasks)
+  }
+
+  function filterList(tasks) {
+    switch (filterOption) {
+      case 1:
+        return tasks.filter((item) => item.state === 'In Progress')
+      case 2:
+        return tasks.filter((item) => item.deadline < 10)
+      case 3:
+        return tasks.filter((item) => item.state === 'Finished')
+      case 0:
+      default:
+        return tasks
+    }
   }
 
   return (
@@ -71,8 +88,8 @@ function App() {
       </header>
       <section className="app__section">
         <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-        <SelectComponent optionsList={optionsList} />
-        <TasksList tasks={tasks} onClick={() => OnClick() } />
+        <SelectComponent optionsList={optionsList} selectOnChange={filterData} />
+        <TasksList tasks={tasks} />
       </section>
       <footer className="app__footer">
         <div>
