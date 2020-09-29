@@ -2,6 +2,10 @@
   display: grid;
   grid-template-columns: 40px auto 150px 100px;
 
+  &_header {
+    font-weight: 700;
+  }
+
   &__element {
     padding: 5px 20px;
   }

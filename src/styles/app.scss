@@ -1,6 +1,8 @@
 @import-normalize;
+@import '~react-datepicker/dist/react-datepicker.css';
 @import './list.scss';
 @import './list-item.scss';
+@import './select-component.scss';
 
 .app {
   text-align: center;

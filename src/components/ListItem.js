@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 function ListItem(props) {
   return (
@@ -18,11 +18,11 @@ function ListItem(props) {
       </div>
     </div>
   )
-};
+}
 
 ListItem.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-};
+}
 
-export default ListItem;
+export default ListItem
