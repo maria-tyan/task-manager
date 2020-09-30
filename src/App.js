@@ -1,11 +1,10 @@
 import React, { useState }  from 'react'
-import DatePicker from 'react-datepicker'
 import './styles/app.scss'
 import TasksList from './components/TasksList'
 import SelectComponent from './components/SelectComponent'
+import AddTask from './components/AddTask'
 
 function App() {
-  const [startDate, setStartDate] = useState(new Date())
   const tasksData = [
     {
       name: 'Tasks List',
@@ -32,8 +31,6 @@ function App() {
       state: 'In Progress',
     },
   ]
-  const [tasks, setTasks] = useState(tasksData)
-
   const optionsList = [
     {
       name: 'all',
@@ -56,27 +53,21 @@ function App() {
       label: 'Finished'
     },
   ]
-
-  let filterOption = 0
+  const [tasks, setTasks] = useState(tasksData)
+  let [filterOption, setFilter] = useState(0)
 
   function filterData(option) {
-    filterOption = option
-    setTasks(filterList(tasksData))
-    console.log(filterOption, 'app', tasks)
+    setFilter(option)
   }
 
-  function filterList(tasks) {
-    switch (filterOption) {
-      case 1:
-        return tasks.filter((item) => item.state === 'In Progress')
-      case 2:
-        return tasks.filter((item) => item.deadline < 10)
-      case 3:
-        return tasks.filter((item) => item.state === 'Finished')
-      case 0:
-      default:
-        return tasks
-    }
+  function pushNewItem(item) {
+    setTasks(tasks.concat({
+      id: item.id,
+      name: item.name,
+      // state must be In Progress by default
+      state: 'In Progress',
+      description: item.description,
+    }))
   }
 
   return (
@@ -87,9 +78,9 @@ function App() {
         </h1>
       </header>
       <section className="app__section">
-        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
         <SelectComponent optionsList={optionsList} selectOnChange={filterData} />
-        <TasksList tasks={tasks} />
+        <TasksList tasks={tasks} filter={filterOption} />
+        <AddTask addData={pushNewItem} />
       </section>
       <footer className="app__footer">
         <div>
