@@ -8,7 +8,8 @@ function TasksList(props) {
       case 1:
         return tasks.filter((item) => item.state === 'In Progress')
       case 2:
-        return tasks.filter((item) => item.deadline < 1)
+        const currentDate = new Date()
+        return tasks.filter((item) => new Date(item.deadline) < currentDate)
       case 3:
         return tasks.filter((item) => item.state === 'Finished')
       case 0:

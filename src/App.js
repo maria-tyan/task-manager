@@ -9,25 +9,25 @@ function App() {
     {
       name: 'Tasks List',
       description: 'Make a List Of Tasks',
-      deadline: 5,
+      deadline: '10/3/2020',
       state: 'In Progress',
     },
     {
       name: 'Task Init Page',
       description: 'Make a Task Init Page',
-      deadline: 10,
+      deadline: '7/7/2020',
       state: 'In Progress',
     },
     {
       name: 'Filter',
       description: 'Make a Filter Fror Task List',
-      deadline: 20,
+      deadline: '10/23/2020',
       state: 'Finished',
     },
     {
       name: 'Create Form',
       description: 'Make a Form',
-      deadline: 27,
+      deadline: '11/1/2021',
       state: 'In Progress',
     },
   ]
@@ -67,6 +67,7 @@ function App() {
       // state must be In Progress by default
       state: 'In Progress',
       description: item.description,
+      deadline: new Date(item.deadline).toLocaleDateString("en-US")
     }))
   }
 

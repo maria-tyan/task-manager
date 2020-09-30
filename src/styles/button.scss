@@ -1,0 +1,47 @@
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid midnightblue;
+  border-radius: 10px;
+  background-color: transparent;
+  color: midnightblue;
+  width: 240px;
+  height: 50px;
+  padding: 0 20px;
+  margin: 10px auto;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all .5s ease-in;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(midnightblue, .7);
+    transition: all .5s ease-in;
+    transform: translateX(-100%);
+    z-index: 1;
+  }
+
+  &__text {
+    z-index: 2;
+  }
+
+  &:hover {
+    color: white;
+  
+    &::before {
+      transform: translateX(0);
+    }
+  }
+}

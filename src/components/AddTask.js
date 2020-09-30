@@ -8,6 +8,7 @@ function AddTask(props) {
   const [deadline, setEndDate] = useState(new Date())
   function HandleFormData(e) {
     e.preventDefault()
+    console.log(deadline)
     props.addData({
       id: Date.now(),
       name,
@@ -21,10 +22,34 @@ function AddTask(props) {
 
   return (
     <form className="form" onSubmit={HandleFormData}>
-      <input type='text' value={name} onChange={event => setName(event.target.value)} />
-      <textarea type='text' value={description} onChange={event => setDescription(event.target.value)} />
-      <DatePicker selected={deadline} onChange={date => setEndDate(date)} />
-      <button type='submit'>Add</button>
+      <div className='form__input-wrapper'>
+        <label className='form__label'>Title</label>
+        <input
+          type='text'
+          value={name}
+          className='form__input'
+          onChange={event => setName(event.target.value)} />
+      </div>
+      
+      <div className='form__input-wrapper'>
+        <label className='form__label'>Description</label>
+        <textarea
+          type='text'
+          value={description}
+          className='form__input form__input_description'
+          onChange={event => setDescription(event.target.value)} />
+      </div>
+
+      <div className='form__input-wrapper'>
+        <label className='form__label'>Deadline</label>
+        <DatePicker
+          selected={deadline}
+          className='form__input'
+          onChange={date => setEndDate(date)} />
+      </div>
+      <button type='submit' className='button'>
+        <span className='button__text'>Add Task</span>
+      </button>
     </form>
   )
 }
