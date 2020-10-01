@@ -6,18 +6,23 @@ function AddTask(props) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [deadline, setEndDate] = useState(new Date())
+  const [validation, setValidation] = useState(true)
   function HandleFormData(e) {
     e.preventDefault()
     console.log(deadline)
-    props.addData({
-      id: Date.now(),
-      name,
-      description,
-      deadline,
-    })
-    
-    setName('')
-    setDescription('')
+    if (name.trim() && description.trim()) {
+      props.addData({
+        id: Date.now(),
+        name,
+        description,
+        deadline,
+      })
+
+      setName('')
+      setDescription('')
+    } else {
+      setValidation(false)
+    }
   }
 
   return (
@@ -47,6 +52,8 @@ function AddTask(props) {
           className='form__input'
           onChange={date => setEndDate(date)} />
       </div>
+
+      {validation ? <div>Everything seems good</div> : <div>All fields are required</div> }
       <button type='submit' className='button'>
         <span className='button__text'>Add Task</span>
       </button>
