@@ -1,4 +1,10 @@
 import React, { useState }  from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
 import './styles/app.scss'
 import TasksList from './components/TasksList'
 import SelectComponent from './components/SelectComponent'
@@ -72,28 +78,53 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <header className="app__header">
-        <h1>
-          Task Manager
-        </h1>
-      </header>
-      <section className="app__section">
-        <SelectComponent optionsList={optionsList} selectOnChange={filterData} />
-        <TasksList tasks={tasks} filter={filterOption} />
-        <AddTask addData={pushNewItem} />
-      </section>
-      <footer className="app__footer">
-        <div>
-          <p>
-            &copy;
-            { new Date().getFullYear() }
-            &nbsp;
-            Maria Efremova
-          </p>
-        </div>
-      </footer>
-    </div>
+    <Router>
+      <div className="app">
+        <header className="app__header">
+          <h1>
+            Task Manager
+          </h1>
+        </header>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/new-task">Add new task</Link>
+            </li>
+            <li>
+              <Link to="/task-info">Task info</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/new-task">
+            <AddTask addData={pushNewItem} />
+          </Route>
+          <Route path="/task-info">
+            <h2>Task info page</h2>
+          </Route>
+          <Route path="/">
+            <section className="app__section">
+              <SelectComponent optionsList={optionsList} selectOnChange={filterData} />
+              <TasksList tasks={tasks} filter={filterOption} />
+              
+            </section>
+          </Route>
+        </Switch>
+        <footer className="app__footer">
+          <div>
+            <p>
+              &copy;
+              { new Date().getFullYear() }
+              &nbsp;
+              Maria Efremova
+            </p>
+          </div>
+        </footer>
+      </div>
+    </Router>
   )
 }
 
