@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useParams,
 } from "react-router-dom"
 import './styles/app.scss'
 import TasksList from './components/TasksList'
@@ -77,6 +78,16 @@ function App() {
     }))
   }
 
+  function Child() {
+    let { name } = useParams();
+  
+    return (
+      <div>
+        <h3>Task name: {name}</h3>
+      </div>
+    );
+  }
+
   return (
     <Router>
       <div className="app">
@@ -93,26 +104,20 @@ function App() {
             <li>
               <Link to="/new-task">Add new task</Link>
             </li>
-            <li>
-              <Link to="/task-info">Task info</Link>
-            </li>
           </ul>
         </nav>
-        <Switch>
-          <Route path="/new-task">
-            <AddTask addData={pushNewItem} />
-          </Route>
-          <Route path="/task-info">
-            <h2>Task info page</h2>
-          </Route>
-          <Route path="/">
-            <section className="app__section">
+        <section className="app__section">
+          <Switch>
+            <Route path="/new-task">
+              <AddTask addData={pushNewItem} />
+            </Route>
+            <Route path="/:name" children={<Child />} />
+            <Route path="/">
               <SelectComponent optionsList={optionsList} selectOnChange={filterData} />
               <TasksList tasks={tasks} filter={filterOption} />
-              
-            </section>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </section>
         <footer className="app__footer">
           <div>
             <p>

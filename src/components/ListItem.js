@@ -1,4 +1,7 @@
 import React from 'react'
+import {
+  Link,
+} from "react-router-dom"
 import PropTypes from 'prop-types'
 
 function ListItem(props) {
@@ -8,7 +11,7 @@ function ListItem(props) {
         { props.index + 1 }
       </div>
       <div className="list-item__element">
-        { props.item.name }
+        <Link to={`${props.item.name}`}>{ props.item.name }</Link>
       </div>
       <div className="list-item__element">
         { props.item.state }
